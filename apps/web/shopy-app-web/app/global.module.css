@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
+/* :root {
+  --foreground-rgb: 22, 255, 111;
 }
 
 @media (prefers-color-scheme: light) {
@@ -11,4 +11,8 @@
     --foreground-rgb: 255, 255, 255;
   }
 }
+ */
 
+.body {
+	background: #FCFCFC;
+}

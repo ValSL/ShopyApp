@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const myColors: MantineColorsTuple = [
+const shopyBlue: MantineColorsTuple = [
 	"#e5f4ff",
 	"#d1e3ff",
 	"#a2c5f9",
@@ -33,7 +33,8 @@ export const theme = createTheme({
 	fontFamily: inter.style.fontFamily,
 	primaryColor: "shopy-blue",
 	colors: {
-		"shopy-blue": myColors,
+		"shopy-blue": shopyBlue,
 		"blacklight": blacklight,
 	},
+	
 });

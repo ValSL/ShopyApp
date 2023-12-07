@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import global from "./global.module.css";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript, Container } from "@mantine/core";
 import { theme } from "./theme";
@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			<head>
 				<ColorSchemeScript />
 			</head>
-			<body>
+			<body className={global.body}>
 				<MantineProvider theme={theme}>
 					<MainLayout>{children}</MainLayout>
 					{/* {children} */}
