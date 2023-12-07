@@ -1,0 +1,28 @@
+.header {
+	padding-left: 3rem;
+	padding-right: 3rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+
+.navLinkRoot {
+    height: 40px;
+    width: 140px;
+	&[data-active] {
+		background: var(--mantine-color-blacklight-1);
+        color: black;
+		border-radius: 20px;
+	}
+    color: var(--mantine-color-blacklight-3);
+	border-radius: 20px;
+}
+
+.navLinkBody {
+	display: flex;
+    justify-content: center;
+}
+
+.logoBlock {
+    cursor: pointer;
+}
