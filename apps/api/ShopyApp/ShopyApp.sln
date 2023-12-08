@@ -3,7 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopyApp", "ShopyApp\ShopyApp.csproj", "{3AFAFF58-B252-44A5-8D77-AA95D1D39B16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopyApp", "ShopyApp\ShopyApp.csproj", "{3AFAFF58-B252-44A5-8D77-AA95D1D39B16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopyApp.Infrastructure", "ShopyApp.Infrastructure\ShopyApp.Infrastructure.csproj", "{30378C80-527A-4AA6-8E08-62B6878BE6A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopyApp.Contracts", "ShopyApp.Contracts\ShopyApp.Contracts.csproj", "{94E64A2A-5816-4D90-B89C-820A917E8305}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopyApp.Application", "ShopyApp.Application\ShopyApp.Application.csproj", "{CE47DECE-FA59-4899-AF32-733E5BAB952B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopyApp.Domain", "ShopyApp.Domain\ShopyApp.Domain.csproj", "{EEC7A27A-A08C-46E3-B744-DBC598037DD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +23,22 @@ Global
 		{3AFAFF58-B252-44A5-8D77-AA95D1D39B16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3AFAFF58-B252-44A5-8D77-AA95D1D39B16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3AFAFF58-B252-44A5-8D77-AA95D1D39B16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30378C80-527A-4AA6-8E08-62B6878BE6A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30378C80-527A-4AA6-8E08-62B6878BE6A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30378C80-527A-4AA6-8E08-62B6878BE6A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30378C80-527A-4AA6-8E08-62B6878BE6A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E64A2A-5816-4D90-B89C-820A917E8305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E64A2A-5816-4D90-B89C-820A917E8305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E64A2A-5816-4D90-B89C-820A917E8305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E64A2A-5816-4D90-B89C-820A917E8305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE47DECE-FA59-4899-AF32-733E5BAB952B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE47DECE-FA59-4899-AF32-733E5BAB952B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE47DECE-FA59-4899-AF32-733E5BAB952B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE47DECE-FA59-4899-AF32-733E5BAB952B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEC7A27A-A08C-46E3-B744-DBC598037DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEC7A27A-A08C-46E3-B744-DBC598037DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEC7A27A-A08C-46E3-B744-DBC598037DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEC7A27A-A08C-46E3-B744-DBC598037DD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

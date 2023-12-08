@@ -1,14 +1,21 @@
+using ShopyApp.Application;
+using ShopyApp.Application.Services.Authentication;
+using ShopyApp.Endpoints;
+using ShopyApp.Infrastructure;
 using ShopyApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+{
+    builder.Services.AddApplication();
+    builder.Services.AddInfrastructure();
+    builder.Services.AddDbContext<AppDbContext>();
+}
 
-builder.Services.AddDbContext<AppDbContext>();
 
 var app = builder.Build();
-
-app.MapGet("/api/products", (AppDbContext db) =>
 {
-    return db.Products;
-});
+    app.MapAuthEndpoints();
+    app.MapProductEndpoints();
 
-app.Run();
+    app.Run();
+}
