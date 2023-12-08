@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using ShopyApp.Application.Services.Authentication;
+﻿using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +12,9 @@ namespace ShopyApp.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection serviceCollection)
         {
-            serviceCollection.AddScoped<IAuthenticationService, AuthenticationService>();
+            //serviceCollection.AddScoped<IAuthenticationCommandService, AuthenticationCommandService>();
+            //serviceCollection.AddScoped<IAuthenticationQueryService, AuthenticationQueryService>();
+            serviceCollection.AddMediatR(typeof(DependencyInjection).Assembly);
             return serviceCollection;
         }
     }

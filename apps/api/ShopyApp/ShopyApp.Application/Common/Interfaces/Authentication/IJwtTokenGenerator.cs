@@ -1,6 +1,8 @@
-﻿namespace ShopyApp.Application;
+﻿using ShopyApp.Domain.Entities;
+
+namespace ShopyApp.Application;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateToken(Guid id, string firstname, string lastname);
+    string GenerateToken(User user);
 }

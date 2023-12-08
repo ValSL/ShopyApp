@@ -1,15 +1,13 @@
-﻿using System;
+﻿using ShopyApp.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopyApp.Application.Services.Authentication
+namespace ShopyApp.Application.Common
 {
     public record AuthenticationResult(
-        Guid Id,
-        string FirstName,
-        string LastName,
-        string Email,
+        User User,
         string Token);
 }
