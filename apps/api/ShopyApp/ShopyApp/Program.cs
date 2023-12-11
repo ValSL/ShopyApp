@@ -1,23 +1,21 @@
-using Microsoft.AspNetCore.Mvc;
-using ShopyApp;
-using ShopyApp.Application;
-using ShopyApp.Controllers;
-using ShopyApp.Infrastructure;
-using ShopyApp.Models;
+using System.Reflection;
+using Carter;
+using FluentValidation;
+using ShopyApp.Common.Mapping;
+using ShopyApp.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication()
-                    .AddInfrastructure(builder.Configuration)
-                    .AddPresentation();
+    builder.Services.AddAuthFeatures(builder.Configuration);
     builder.Services.AddDbContext<AppDbContext>();
+    builder.Services.AddCarter();
+    builder.Services.AddMapping();
+    builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 }
 
 
 var app = builder.Build();
 {
-    //app.UseExceptionHandler("/error");
-    app.MapControllers();
-
+    app.MapCarter();
     app.Run();
 }
