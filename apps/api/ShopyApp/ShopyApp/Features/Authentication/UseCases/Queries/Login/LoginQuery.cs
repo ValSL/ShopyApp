@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using OneOf;
 using ShopyApp.Application.Common;
-using ShopyApp.Application.Common.Errors;
+using ShopyApp.Common.Errors;
 using System;
 using System.Collections.Generic;
 using System.Linq;

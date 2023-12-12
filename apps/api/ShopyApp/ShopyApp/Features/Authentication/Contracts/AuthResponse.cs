@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 namespace ShopyApp.Contracts.Authentication
 {
     public record AuthResposne(
-        Guid Id,
         string FirstName,
         string LastName,
         string Email,

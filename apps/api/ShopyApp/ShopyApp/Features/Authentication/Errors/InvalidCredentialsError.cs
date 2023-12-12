@@ -4,12 +4,13 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using ShopyApp.Common.Errors;
 
 namespace ShopyApp.Application.Common.Errors
 {
     public class InvalidCredentialsError : IError
     {
-        public HttpStatusCode StatusCode { get; set; } = HttpStatusCode.BadRequest;
+        public int StatusCode { get; set; } = StatusCodes.Status400BadRequest;
         public string Message { get; set; } = "Invalid credentials";
 
     }

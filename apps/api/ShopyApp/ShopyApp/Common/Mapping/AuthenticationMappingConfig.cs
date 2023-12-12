@@ -8,8 +8,8 @@ namespace ShopyApp.Common.Mapping
     {
         public void Register(TypeAdapterConfig config)
         {
-            // config.NewConfig<AuthenticationResult, AuthResposne>()
-            //     .Map(dest => dest, src => src.User);
+            //config.NewConfig<AuthenticationResult, AuthResposne>()
+            //    .Map(dest => dest, src => src.User);
         }
     }
 }

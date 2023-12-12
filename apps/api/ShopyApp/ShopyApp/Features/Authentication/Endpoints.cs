@@ -26,24 +26,30 @@ namespace ShopyApp.Features.Authentication
             var result = await validator.ValidateAsync(registerCommand);
             if (!result.IsValid)
             {
-                return Results.ValidationProblem(result.ToDictionary(), statusCode: 400);
+                return Results.ValidationProblem(result.ToDictionary());
             }
 
             var authResult = await mediator.Send(registerCommand);
 
             return authResult.Match(
                 result => Results.Ok(mapper.Map<AuthResposne>(result)),
-                error => Results.BadRequest(error));
+                error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
         }
 
-         public async Task<IResult> Login(IMediator mediator, IMapper mapper, IValidator<RegisterCommand> validator, RegisterRequest request)
+        public async Task<IResult> Login(IMediator mediator, IMapper mapper, IValidator<LoginQuery> validator, LoginRequest request)
         {
-            var registerCommand = mapper.Map<LoginQuery>(request);
-            var authResult = await mediator.Send(registerCommand);
+            var loginQuery = mapper.Map<LoginQuery>(request);
+            var validationResult = await validator.ValidateAsync(loginQuery);
+            if (!validationResult.IsValid)
+            {
+                return Results.ValidationProblem(validationResult.ToDictionary());
+            }
+            
+            var authResult = await mediator.Send(loginQuery);
 
             return authResult.Match(
                 result => Results.Ok(mapper.Map<AuthResposne>(result)),
-                error => Results.BadRequest(error));
+                error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
         }
     }
 }

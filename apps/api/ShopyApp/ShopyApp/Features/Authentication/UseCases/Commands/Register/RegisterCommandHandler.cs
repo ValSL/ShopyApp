@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using ShopyApp.Features.Authentication.Services.JwtTokenGenerator;
 using ShopyApp.Features.Authentication.Repositories.UserRepository;
 using ShopyApp.Features.Authentication.Models;
+using ShopyApp.Common.Errors;
 
 namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
 {
@@ -26,8 +27,6 @@ namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
 
         public async Task<OneOf<AuthenticationResult, IError>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask; // заглушка
-            System.Console.WriteLine("RegisterCommandHandler");
             if (_userRepository.GetUserByEmail(request.Email) != null)
             {
                 return new DuplicateEmailError();
@@ -35,17 +34,15 @@ namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
 
             User user = new User()
             {
-                // FirstName = request.FirstName,
-                // LastName = request.LastName,
-                Username = request.FirstName,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 Email = request.Email,
-                PasswordHash = request.Password
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
             };
 
-            _userRepository.AddUser(user);
+            var addedUser = await _userRepository.AddUserAsync(user);
 
-            string token = _jwtTokenGenerator.GenerateToken(user);
-            return new AuthenticationResult(token);
+            return new AuthenticationResult(addedUser.FirstName, addedUser.LastName, addedUser.Email, string.Empty);
         }
     }
 }

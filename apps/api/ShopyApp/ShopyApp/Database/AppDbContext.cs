@@ -118,8 +118,6 @@ public partial class AppDbContext : DbContext
 
             entity.HasIndex(e => e.Email, "users_email_key").IsUnique();
 
-            entity.HasIndex(e => e.Username, "users_username_key").IsUnique();
-
             entity.Property(e => e.UserId).HasColumnName("user_id");
             entity.Property(e => e.Email)
                 .HasMaxLength(255)
@@ -127,9 +125,12 @@ public partial class AppDbContext : DbContext
             entity.Property(e => e.PasswordHash)
                 .HasColumnType("character varying")
                 .HasColumnName("password_hash");
-            entity.Property(e => e.Username)
+            entity.Property(e => e.FirstName)
                 .HasMaxLength(50)
-                .HasColumnName("username");
+                .HasColumnName("first_name");
+            entity.Property(e => e.LastName)
+                .HasMaxLength(50)
+                .HasColumnName("last_name");
         });
 
         OnModelCreatingPartial(modelBuilder);
