@@ -33,13 +33,15 @@ namespace ShopyApp.Features.Authentication
 
             return authResult.Match(
                 result => Results.Ok(mapper.Map<AuthResposne>(result)),
-                error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
+                errors => ProblemDetailsHelper.ProblemDetails(errors));
         }
+        
 
         public async Task<IResult> Login(IMediator mediator, IMapper mapper, IValidator<LoginQuery> validator, LoginRequest request)
         {
             var loginQuery = mapper.Map<LoginQuery>(request);
             var validationResult = await validator.ValidateAsync(loginQuery);
+            
             if (!validationResult.IsValid)
             {
                 return Results.ValidationProblem(validationResult.ToDictionary());
@@ -49,7 +51,8 @@ namespace ShopyApp.Features.Authentication
 
             return authResult.Match(
                 result => Results.Ok(mapper.Map<AuthResposne>(result)),
-                error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
+                errors => ProblemDetailsHelper.ProblemDetails(errors));
+
         }
     }
 }

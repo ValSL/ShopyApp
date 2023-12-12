@@ -14,5 +14,5 @@ namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
         string FirstName,
         string LastName,
         string Email,
-        string Password) : IRequest<OneOf<AuthenticationResult, IError>>;
+        string Password) : IRequest<OneOf<AuthenticationResult, List<Error>>>;
 }

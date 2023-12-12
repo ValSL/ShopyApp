@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using OneOf;
-using ShopyApp.Application.Common.Errors;
 using ShopyApp.Application.Common;
 using System;
 using System.Collections.Generic;
@@ -11,10 +10,12 @@ using ShopyApp.Features.Authentication.Services.JwtTokenGenerator;
 using ShopyApp.Features.Authentication.Repositories.UserRepository;
 using ShopyApp.Features.Authentication.Models;
 using ShopyApp.Common.Errors;
+using ShopyApp.Features.Authentication.Errors;
+using ShopyApp.Features.Products.Errors;
 
 namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
 {
-    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, OneOf<AuthenticationResult, IError>>
+    public class RegisterCommandHandler : IRequestHandler<RegisterCommand, OneOf<AuthenticationResult, List<Error>>>
     {
 
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
@@ -25,11 +26,11 @@ namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
             _userRepository = userRepository;
         }
 
-        public async Task<OneOf<AuthenticationResult, IError>> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<OneOf<AuthenticationResult, List<Error>>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             if (_userRepository.GetUserByEmail(request.Email) != null)
             {
-                return new DuplicateEmailError();
+                return new List<Error> { ErrorsAuthentication.DuplicateEmailError };
             }
 
             User user = new User()

@@ -2,6 +2,7 @@ using Carter;
 using FluentValidation;
 using MapsterMapper;
 using MediatR;
+using ShopyApp;
 using ShopyApp.Features.Products.Contracts;
 using ShopyApp.Features.Products.UseCases.Queries.GetProductById;
 
@@ -23,7 +24,7 @@ public class ProductsEndpoints : ICarterModule
 
         return getAllProductsResult.Match(
             result => Results.Ok(result.Products),
-            error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
+            errors => ProblemDetailsHelper.ProblemDetails(errors));
     }
 
     public async Task<IResult> GetProductById([AsParameters]GetProductByIdRequest request, IMediator mediator, IMapper mapper, IValidator<GetProductByIdQuery> validator)
@@ -39,7 +40,7 @@ public class ProductsEndpoints : ICarterModule
 
         return getProductByIdResult.Match(
             result => Results.Ok(result.Product),
-            error => Results.Problem(detail: error.Message, statusCode: error.StatusCode));
+            errors => ProblemDetailsHelper.ProblemDetails(errors));
     }
 
 

@@ -31,15 +31,14 @@ var builder = WebApplication.CreateBuilder(args);
     builder.Services.AddDbContext<AppDbContext>();
     builder.Services.AddCarter();
     builder.Services.AddMapping();
+    builder.Services.AddProblemDetails();
     builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 }
 
 
 var app = builder.Build();
 {
-    app.UseExceptionHandler(exceptionHandlerApp => exceptionHandlerApp.Run(async context
-        => await Results.Problem()
-                     .ExecuteAsync(context)));
+    app.UseExceptionHandler("/error");
 
     app.UseAuthentication();
     app.UseAuthorization();

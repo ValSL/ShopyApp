@@ -5,5 +5,5 @@ using ShopyApp.Features.Products.Contracts;
 
 namespace ShopyApp.Features.Products.UseCases.Queries.GetProductById
 {
-    public record GetProductByIdQuery(int Id): IRequest<OneOf<GetProductByIdResult, IError>>;
+    public record GetProductByIdQuery(int Id): IRequest<OneOf<GetProductByIdResult, List<Error>>>;
 }
