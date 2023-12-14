@@ -1,15 +1,15 @@
 using MediatR;
 using OneOf;
 using ShopyApp.Common.Errors;
-using ShopyApp.Features.Products.Contracts;
 using ShopyApp.Features.Products.Errors;
 using ShopyApp.Features.Products.Models;
 using ShopyApp.Features.Products.Repositories;
+using ShopyApp.Features.Products.UseCases.Queries.GetAllProducts;
 
 public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, OneOf<GetAllProductsResult, List<Error>>>
 {
-    private readonly IProducRepository _productsRepository;
-    public GetAllProductsQueryHandler(IProducRepository productsRepository)
+    private readonly IProductRepository _productsRepository;
+    public GetAllProductsQueryHandler(IProductRepository productsRepository)
     {
         _productsRepository = productsRepository;
     }

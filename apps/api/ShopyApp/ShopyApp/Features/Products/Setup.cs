@@ -6,7 +6,8 @@ public static class Setup
 {
     public static IServiceCollection AddProductsFeatures(this IServiceCollection serviceCollection)
     {
-        serviceCollection.AddScoped<IProducRepository, ProductRepository>();
+        serviceCollection.AddScoped<IProductRepository, ProductRepository>();
+        serviceCollection.AddScoped<IImageUploadService, CloudinaryImageUploadService>();
         return serviceCollection;
     }
 }

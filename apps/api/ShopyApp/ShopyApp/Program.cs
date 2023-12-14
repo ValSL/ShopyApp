@@ -29,6 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
         .AddProductsFeatures();
 
     builder.Services.AddDbContext<AppDbContext>();
+    builder.Services.AddDbContext<MySqlDbContext>();
     builder.Services.AddCarter();
     builder.Services.AddMapping();
     builder.Services.AddProblemDetails();
