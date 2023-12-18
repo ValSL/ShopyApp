@@ -22,19 +22,13 @@ public class ProductsEndpoints : ICarterModule
             group.MapPost("/create", CreateProduct).RequireAuthorization();
         }
     }
-    public async Task<IResult> CreateProduct(HttpRequest request,HttpContext context, IMediator mediator, IMapper mapper, IValidator<CreateProductCommand> validator)
+    public async Task<IResult> CreateProduct(HttpRequest request, HttpContext httpContext, IMediator mediator, IMapper mapper, IValidator<CreateProductCommand> validator)
     {
-        // var a = context.User.FindFirstValue(JwtRegisteredClaimNames.Sub);
-        // var a = context.User.Claims.First(item => item.Type == JwtRegisteredClaimNames.Sub).Value;
-
-        var claimsIdentity = context.User.Identity as ClaimsIdentity;
-        var userName = claimsIdentity?.FindFirst(JwtRegisteredClaimNames.Sub);
-
         var createProductCommand = new CreateProductCommand(
             request.Form["Title"],
             request.Form["Price"],
             request.Form.Files["Image"],
-            int.Parse(context.User.FindFirstValue(JwtRegisteredClaimNames.Sub))
+            int.Parse(httpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub))
         );
         
         var validationResult = await validator.ValidateAsync(createProductCommand);

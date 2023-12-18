@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using ShopyApp;
 using ShopyApp.Common.Mapping;
 using ShopyApp.Database;
+using ShopyApp.Features.Carts;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -26,7 +27,8 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services
         .AddAuthFeatures(builder.Configuration)
-        .AddProductsFeatures();
+        .AddProductsFeatures()
+        .AddCartFeatures();
 
     builder.Services.AddDbContext<AppDbContext>();
     builder.Services.AddDbContext<MySqlDbContext>();

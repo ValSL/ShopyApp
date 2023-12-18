@@ -25,14 +25,14 @@ namespace ShopyApp.Features.Authentication.Repositories.UserRepository
 
         public async Task<User> AddUserAsync(User user)
         {
-            var resultUser = await _mySqlDbContext.Users.AddAsync(user);
-            await _mySqlDbContext.SaveChangesAsync();
+            var resultUser = await _appDbContext.Users.AddAsync(user);
+            await _appDbContext.SaveChangesAsync();
             return resultUser.Entity;
         }
 
         public User? GetUserByEmail(string email)
         {
-            return _mySqlDbContext.Users.AsNoTracking().SingleOrDefault(u => u.Email == email);
+            return _appDbContext.Users.AsNoTracking().SingleOrDefault(u => u.Email == email);
         }
     }
 }

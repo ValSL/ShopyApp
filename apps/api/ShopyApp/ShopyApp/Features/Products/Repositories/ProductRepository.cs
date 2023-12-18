@@ -17,17 +17,17 @@ public class ProductRepository : IProductRepository
 
     public async Task CreateProduct(Product product)
     {
-        await _mySqlDbContext.Products.AddAsync(product);
-        await _mySqlDbContext.SaveChangesAsync();
+        await _dbContext.Products.AddAsync(product);
+        await _dbContext.SaveChangesAsync();
     }
 
     public Product? GetProductById(int id)
     {
-        return _mySqlDbContext.Products.SingleOrDefault(item => item.ProductId == id);
+        return _dbContext.Products.SingleOrDefault(item => item.ProductId == id);
     }
 
     public List<Product>? GetProducts()
     {
-        return _mySqlDbContext.Products.AsNoTracking().ToList();
+        return _dbContext.Products.AsNoTracking().ToList();
     }
 }
