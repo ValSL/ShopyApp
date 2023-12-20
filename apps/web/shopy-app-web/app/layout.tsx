@@ -4,8 +4,6 @@ import global from "./global.module.css";
 import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript, Container } from "@mantine/core";
 import { theme } from "./theme";
-import MainLayout from "./components/MainLayout";
-import Header from "./components/Header";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -20,8 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 			</head>
 			<body className={global.body}>
 				<MantineProvider theme={theme}>
-					<MainLayout>{children}</MainLayout>
-					{/* {children} */}
+					{children}
 				</MantineProvider>
 			</body>
 		</html>

@@ -1,4 +1,4 @@
 import { redirect } from "next/navigation";
 export default function Default() {
-	redirect("/home");
+	redirect("/home/product-list");
 }

@@ -1,0 +1,17 @@
+.testcontainer {
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    @mixin smaller-than $mantine-breakpoint-lg {
+        /* display: grid; */
+        /* grid-template-columns: 1fr; */
+        align-items: center;
+        height: 100vh;
+      }
+}
+
+.image {
+    justify-self: center;
+    @mixin smaller-than $mantine-breakpoint-lg {
+        display: none;
+      }
+}

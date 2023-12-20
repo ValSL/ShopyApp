@@ -1,0 +1,10 @@
+.mainContainer{
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+}
+
+.login{
+    align-self: center;
+    grid-column: 2;
+}
+

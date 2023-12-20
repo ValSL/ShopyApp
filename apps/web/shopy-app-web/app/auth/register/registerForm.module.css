@@ -1,0 +1,11 @@
+.mainContainer{
+    display: grid;
+    grid-template-columns: 2fr 3fr 2fr;
+}
+
+
+.register{
+    align-self: center;
+    grid-column: 2;
+}
+

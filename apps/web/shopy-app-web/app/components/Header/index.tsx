@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { Exo_2 } from "next/font/google";
 
 
-const data = [{ label: "Marketplace", href: '/' }, { label: "Your Products", href: '/user-products' }];
+const data = [{ label: "Marketplace", href: '/' }, { label: "Your Products", href: '/home/user-products' }];
 
 const Header = () => {
 	const [active, setActive] = useState(0);
