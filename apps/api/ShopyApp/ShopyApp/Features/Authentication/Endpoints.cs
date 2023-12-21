@@ -34,7 +34,7 @@ namespace ShopyApp.Features.Authentication
             return authResult.Match(
                 result => Results.Ok(mapper.Map<AuthResposne>(result)),
                 errors => ProblemDetailsHelper.ProblemDetails(errors));
-        }
+        }   
         
 
         public async Task<IResult> Login(IMediator mediator, IMapper mapper, IValidator<LoginQuery> validator, LoginRequest request)

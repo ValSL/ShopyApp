@@ -1,8 +1,6 @@
 using System.Reflection;
-using System.Text;
 using Carter;
 using FluentValidation;
-using Microsoft.IdentityModel.Tokens;
 using ShopyApp;
 using ShopyApp.Common.Mapping;
 using ShopyApp.Database;
@@ -10,6 +8,14 @@ using ShopyApp.Features.Carts;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy(name: "ShopySpecifisOrigins", policy => { policy.WithOrigins("http://localhost:3000")
+                                                                            .AllowAnyHeader()
+                                                                            .AllowAnyMethod()
+                                                                            .AllowCredentials();});
+    });
     builder.Services
         .AddAuthFeatures(builder.Configuration)
         .AddProductsFeatures()
@@ -26,6 +32,8 @@ var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 {
     app.UseExceptionHandler("/error");
+
+    app.UseCors("ShopySpecifisOrigins");
 
     app.UseAuthentication();
     app.UseAuthorization();

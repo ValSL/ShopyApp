@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Flex, NavLink, SimpleGrid, Text } from "@mantine/core";
+import { Badge, Box, Flex, NavLink, SimpleGrid, Text } from "@mantine/core";
 import React, { useState } from "react";
 import BlockSVG from "./components/BlockSvg";
 import CartSVG from "./components/CartSvg";
@@ -36,6 +36,7 @@ const Header = () => {
 	return (
 		<Flex className={classes.header} align="center" justify="space-between">
 			<Flex className={classes.logoBlock} align="center" gap="0.5rem" onClick={() => router.push('/')}>
+				<Badge color="red" size=""/>
 				<BlockSVG />
 				<Text className="hover:cursor-pointer" fw="bold" onClick={() => console.log("qqqqq")}>
 					Shopy

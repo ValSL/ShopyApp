@@ -1,15 +1,14 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Carter;
-using CloudinaryDotNet;
 using FluentValidation;
 using MapsterMapper;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using ShopyApp;
 using ShopyApp.Features.Products.Contracts;
 using ShopyApp.Features.Products.UseCases.Commands.CreateProductCommand;
 using ShopyApp.Features.Products.UseCases.Queries.GetProductById;
+
+namespace ShopyApp.Features.Products;
 
 public class ProductsEndpoints : ICarterModule
 {

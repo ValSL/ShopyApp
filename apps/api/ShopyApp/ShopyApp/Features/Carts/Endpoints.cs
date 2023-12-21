@@ -15,7 +15,7 @@ public class Endpoints : ICarterModule
     {
         var group = app.MapGroup("api/carts").RequireAuthorization();
         {
-            group.MapPut("addtocart", AddToCart);
+            group.MapPut("additem", AddToCart);
         }
     }
 
