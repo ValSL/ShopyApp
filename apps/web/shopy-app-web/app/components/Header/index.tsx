@@ -1,21 +1,19 @@
 "use client";
 
-import { Badge, Box, Flex, NavLink, SimpleGrid, Text } from "@mantine/core";
+import { Badge, Flex, NavLink, SimpleGrid, Text } from "@mantine/core";
 import React, { useState } from "react";
 import BlockSVG from "./components/BlockSvg";
 import CartSVG from "./components/CartSvg";
 import ExitSVG from "./components/ExitSvg";
 import classes from "./header.module.css";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Exo_2 } from "next/font/google";
 
 
 const data = [{ label: "Marketplace", href: '/' }, { label: "Your Products", href: '/home/user-products' }];
 
 const Header = () => {
 	const [active, setActive] = useState(0);
-    const router = useRouter();
+	const router = useRouter();
 
 	const items = data.map((item, index) => (
 		<NavLink
@@ -24,19 +22,19 @@ const Header = () => {
 			label={item.label}
 			onClick={() => {
 				setActive(index);
-                router.push(item.href)
+				router.push(item.href);
 			}}
-            classNames={{
-                root: classes.navLinkRoot,
-                body: classes.navLinkBody,
-            }}
+			classNames={{
+				root: classes.navLinkRoot,
+				body: classes.navLinkBody,
+			}}
 		/>
 	));
 
 	return (
 		<Flex className={classes.header} align="center" justify="space-between">
 			<Flex className={classes.logoBlock} align="center" gap="0.5rem" onClick={() => router.push('/')}>
-				<Badge color="red" size=""/>
+				<Badge color="red" size="" />
 				<BlockSVG />
 				<Text className="hover:cursor-pointer" fw="bold" onClick={() => console.log("qqqqq")}>
 					Shopy

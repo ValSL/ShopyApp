@@ -1,26 +1,40 @@
-import apiClient from "@/app/shared/api/axios.client"
-import { useMutation } from "@tanstack/react-query";
+import { RoutesPaths } from "@/app/routes";
+import apiClient from "@/app/shared/api/axios.client";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
+export function useRegister<T>() {
+	const register = (data: T) => {
+		return apiClient.post("auth/register", data);
+	};
 
-export function useRegister<T>(){
-    const register = (data: T) => {
-        return apiClient.post("auth/register", data)
-    }
-    
-    return useMutation({
-        mutationFn: register
-    })
+	return useMutation({
+		mutationFn: register,
+		onSuccess: () => {},
+	});
 }
 
-export function useLogin<T>(){
-    const login = (data: T) => {
-        return apiClient.post("auth/login", data)
-    }
+export function useLogin<T>() {
+	const login = async (data: T) => {
+		return await apiClient.post("auth/login", data);
+	};
 
-    return useMutation({
-        mutationFn: login,
-        onSuccess: (response: {data: {token: string}}) => {
-            localStorage.setItem("access_token", response.data.token)
-        },
-    })
+	return useMutation({
+		mutationFn: login,
+	});
+}
+
+export function useCheckUser() {
+	const checkUser = async () => {
+		const response = await apiClient.get("auth/check");
+		console.log("user check", response);
+
+		return response;
+	};
+
+	return useQuery({
+		queryKey: ["user"],
+		queryFn: checkUser,
+		retry: 0,
+	});
 }

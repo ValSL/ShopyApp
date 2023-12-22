@@ -20,7 +20,6 @@ var builder = WebApplication.CreateBuilder(args);
         .AddAuthFeatures(builder.Configuration)
         .AddProductsFeatures()
         .AddCartFeatures();
-
     builder.Services.AddDbContext<AppDbContext>();
     builder.Services.AddDbContext<MySqlDbContext>();
     builder.Services.AddCarter();

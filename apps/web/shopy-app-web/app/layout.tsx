@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript, Container } from "@mantine/core";
 import { theme } from "./theme";
 import QueryProvider from "./shared/providers/queryClientProvider";
+import PageScopeProvider from "./shared/providers/pageScopeProvider";
 
 
 export const metadata: Metadata = {
@@ -21,11 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
 			</head>
 			<body className={global.body}>
 				<QueryProvider>
-					<MantineProvider theme={theme}>
-						{children}
-					</MantineProvider>
+					<PageScopeProvider>
+						<MantineProvider theme={theme}>
+							{children}
+						</MantineProvider>
+					</PageScopeProvider>
 				</QueryProvider>
-
 			</body>
 		</html>
 	);

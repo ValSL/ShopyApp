@@ -1,6 +1,5 @@
-import { Box, SimpleGrid, Container, TextInput, Text, CardSection, Image, Flex, Card, Button } from "@mantine/core";
+import { Box, SimpleGrid, TextInput, Text, CardSection, Image, Flex, Card, Button } from "@mantine/core";
 import React from "react";
-import Header from "../../components/Header";
 import Filter from "./components/Filter";
 import classes from "./home.module.css";
 import { IconSearch } from "@tabler/icons-react";
