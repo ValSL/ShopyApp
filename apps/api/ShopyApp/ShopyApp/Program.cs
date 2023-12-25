@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddCors(options =>
     {
-        options.AddPolicy(name: "ShopySpecifisOrigins", policy => { policy.WithOrigins("http://localhost:3000")
+        options.AddPolicy(name: "ShopySpecifisOrigins", policy => { policy.WithOrigins("http://localhost:3000", "https://shopy-app-seven.vercel.app")
                                                                             .AllowAnyHeader()
                                                                             .AllowAnyMethod()
                                                                             .AllowCredentials();});
