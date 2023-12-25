@@ -2,7 +2,6 @@
 using OneOf;
 using ShopyApp.Common.Errors;
 using ShopyApp.Features.Products.Errors;
-using ShopyApp.Features.Products.Models;
 using ShopyApp.Features.Products.Repositories;
 
 namespace ShopyApp.Features.Products.UseCases.Queries.GetProductById

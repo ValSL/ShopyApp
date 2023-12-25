@@ -4,10 +4,6 @@ import classes from "./layout.module.css";
 
 const AuthLayout = ({ children }: PropsWithChildren) => {
   return (
-    // <Box className={classes.testcontainer}>
-    //   <div>1</div>
-    // </Box>
-
     <SimpleGrid cols={{ lg: 2, sm: 1 }} className={classes.testcontainer}>
       {children}
       <Box p="1rem" className={classes.image} h="100vh">

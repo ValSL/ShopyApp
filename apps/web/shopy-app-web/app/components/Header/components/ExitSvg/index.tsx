@@ -5,7 +5,6 @@ import classes from './exit.module.css';
 import { Box } from "@mantine/core";
 
 const ExitSVG = () => {
-	// console.log(props);
 	const router = useRouter();
 	const queryClient = useQueryClient();
 	const clickHandler = () => {

@@ -20,18 +20,7 @@ public class CreateProductCommandHandler : IRequestHandler<CreateProductCommand,
 
     public async Task<OneOf<CreateProductResult, List<Error>>> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
-        // try
-        // {
         var imageUrl = await _uploadService.UploadSingleFile(request.Image);
-
-        // }
-        // catch (Exception ex)
-        // {
-        //     var error = ErrorsProducts.ImageUploadError;
-        //     error.Message = ex.Message;
-        //     return new List<Error> { error };
-        // }
-
         var product = new Product
         {
             Title = request.Title,
