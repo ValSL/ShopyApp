@@ -8,6 +8,8 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRegister } from "../shared/authApi";
+import { useRouter } from "next/navigation";
+import { RoutesPaths } from "@/app/routes";
 
 const registerSchema = z.object({
 	firstName: z.string().min(1, 'Please, enter your name'),
@@ -19,6 +21,7 @@ const registerSchema = z.object({
 type RegisterParams = z.infer<typeof registerSchema>;
 
 const RegisterPage = () => {
+	const router = useRouter();
 
 	const {
 		register,
@@ -34,7 +37,9 @@ const RegisterPage = () => {
 		registerUser(data,
 			{
 				onSuccess: (response: any) => {
-					console.log("success");
+					console.log("push");
+					router.push(RoutesPaths.Login)
+					router.refresh();
 				},
 				onError: (error: any) => {
 					console.log("error");
@@ -49,7 +54,6 @@ const RegisterPage = () => {
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<Stack gap="1.5rem">
 
-
 						<Title size="26px">Sign Up</Title>
 
 						<Stack gap="1rem">
@@ -59,7 +63,7 @@ const RegisterPage = () => {
 							<PasswordInput label="Password" placeholder="Enter password" {...register("password")} error={errors.password?.message} />
 						</Stack>
 
-						<Button type="submit" w="100%">Create account</Button>
+						<Button loading={isPending} type="submit" w="100%">Create account</Button>
 
 						<Group justify="center">Have an accont? <Link href="/auth/login">Sign in</Link></Group>
 

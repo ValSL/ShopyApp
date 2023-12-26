@@ -17,10 +17,12 @@ const PageScopeProvider = ({ children }: PropsWithChildren) => {
 
     if (scope === ScopeType.PUBLIC && isSuccess) {
         router.push(RoutesPaths.ProductList);
+        router.refresh();
     }
 
     if (scope === ScopeType.PRIVATE && isError) {
         router.push(RoutesPaths.Login);
+        router.refresh();
     }
 
     return (

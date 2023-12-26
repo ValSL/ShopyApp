@@ -9,7 +9,7 @@ import classes from "./header.module.css";
 import { useRouter } from "next/navigation";
 
 
-const data = [{ label: "Marketplace", href: '/' }, { label: "Your Products", href: '/home/user-products' }];
+const data = [{ label: "Marketplace", href: '/home/product-list' }, { label: "Your Products", href: '/home/user-products' }];
 
 const Header = () => {
 	const [active, setActive] = useState(0);

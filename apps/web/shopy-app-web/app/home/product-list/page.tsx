@@ -32,7 +32,7 @@ const Cardd = () => {
 	);
 };
 
-const Home = () => {
+const ProductList = () => {
 	return (
 		<SimpleGrid cols={4} px="3rem" spacing={30}>
 			<Box className={classes.filter}>
@@ -72,4 +72,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default ProductList;
