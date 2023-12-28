@@ -9,6 +9,7 @@
 .navLinkRoot {
     height: 40px;
     width: 140px;
+	
 	&[data-active] {
 		background: var(--mantine-color-blacklight-1);
         color: black;
@@ -25,4 +26,18 @@
 
 .logoBlock {
     cursor: pointer;
+}
+
+.links{
+	display: none;
+	@media (max-width: 425px) {
+		display: block;
+	}
+}
+
+.laptopLinks{
+	display: block;
+	@media (max-width: 425px) {
+		display: none;
+	}
 }

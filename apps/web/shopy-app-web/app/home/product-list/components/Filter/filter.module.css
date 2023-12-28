@@ -22,13 +22,8 @@
 
 .container{
     grid-template-rows: 1fr 32px 1fr 12px 36px;
+    @media (max-width: 1024px) {
+        grid-template-rows: 1fr 32px 1fr 12px 36px 10px 36px;
+    }
     column-gap: 12px;
-}
-
-.moneyFilter {
-    grid-row-start: 5;
-    /* border: 1px solid var(--mantine-color-blacklight-1);
-    border-radius: 12px;
-    padding: 0.2rem;
-    background: #FFFFFF; */
 }

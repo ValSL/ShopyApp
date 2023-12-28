@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import global from "./global.module.css";
+
 import "@mantine/core/styles.css";
-import { MantineProvider, ColorSchemeScript, Container } from "@mantine/core";
+import { MantineProvider, ColorSchemeScript, Container, Box } from "@mantine/core";
 import { theme } from "./theme";
 import QueryProvider from "./shared/providers/queryClientProvider";
 import PageScopeProvider from "./shared/providers/pageScopeProvider";
@@ -14,20 +13,27 @@ export const metadata: Metadata = {
 };
 
 
-export default function RootLayout({ children }: { children: React.ReactNode; }) {
+export default function RootLayout({ children }: { children: any; }) {
 	return (
 		<html lang="en">
 			<head>
 				<ColorSchemeScript />
+				<meta
+					name="viewport"
+					content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
+				/>
 			</head>
-			<body className={global.body}>
-				<QueryProvider>
-					<PageScopeProvider>
-						<MantineProvider theme={theme}>
-							{children}
-						</MantineProvider>
-					</PageScopeProvider>
-				</QueryProvider>
+			<body>
+				<MantineProvider theme={theme}>
+					<Box style={{background: "#FCFCFC"}}>
+						<QueryProvider>
+							<PageScopeProvider>
+								{children}
+							</PageScopeProvider>
+						</QueryProvider>
+					</Box>
+
+				</MantineProvider>
 			</body>
 		</html>
 	);
