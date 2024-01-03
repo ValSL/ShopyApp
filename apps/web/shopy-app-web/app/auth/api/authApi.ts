@@ -27,7 +27,6 @@ export function useLogin<T>() {
 export function useCheckUser() {
 	const checkUser = async () => {
 		const response = await apiClient.get("auth/check");
-
 		return response;
 	};
 

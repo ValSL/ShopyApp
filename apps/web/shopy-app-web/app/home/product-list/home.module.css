@@ -6,8 +6,4 @@
 	grid-column: 2 / span 3;
 }
 
-.card {
-	border: 1px solid var(--mantine-color-blacklight-2);
-	border-radius: 12px;
-	/* cursor: pointer; */
-}
+

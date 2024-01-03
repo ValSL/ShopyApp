@@ -1,28 +1,19 @@
 ﻿using MediatR;
 using OneOf;
 using ShopyApp.Application.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ShopyApp.Features.Authentication.Services.JwtTokenGenerator;
 using ShopyApp.Features.Authentication.Repositories.UserRepository;
 using ShopyApp.Features.Authentication.Models;
 using ShopyApp.Common.Errors;
 using ShopyApp.Features.Authentication.Errors;
-using ShopyApp.Features.Products.Errors;
 
 namespace ShopyApp.Features.Authentication.UseCases.Commands.Register
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, OneOf<AuthenticationResult, List<Error>>>
     {
-
-        private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserRepository _userRepository;
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public RegisterCommandHandler(IUserRepository userRepository)
         {
-            _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
         }
 

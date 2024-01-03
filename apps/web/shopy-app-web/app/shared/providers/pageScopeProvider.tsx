@@ -1,6 +1,6 @@
 'use client';
 
-import { useCheckUser } from "@/app/auth/shared/authApi";
+import { useCheckUser } from "@/app/auth/api/authApi";
 import { usePathname, useRouter } from "next/navigation";
 import React, { PropsWithChildren } from 'react';
 import { RoutesPaths, ScopeType, routesConfig } from "@/app/routes";

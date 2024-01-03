@@ -7,7 +7,7 @@ import Link from "next/link";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRegister } from "../shared/authApi";
+import { useRegister } from "../api/authApi";
 import { useRouter } from "next/navigation";
 import { RoutesPaths } from "@/app/routes";
 

@@ -1,0 +1,4 @@
+.card {
+	border: 1px solid var(--mantine-color-blacklight-2);
+	border-radius: 12px;
+}

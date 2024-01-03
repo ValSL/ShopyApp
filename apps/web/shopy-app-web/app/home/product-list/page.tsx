@@ -6,38 +6,14 @@ import Filter from "./components/Filter";
 import classes from "./home.module.css";
 import { IconSearch } from "@tabler/icons-react";
 import { useMediaQuery } from '@mantine/hooks';
+import { useGetAllProducts } from "./api/productListApi";
+import { ProductCard } from "./components/ProductItem";
 
-const Cardd = () => {
-	return (
-		<Card p={0} className={classes.card} >
-			<CardSection>
-				<Image
-					height={160}
-					src="https://firebasestorage.googleapis.com/v0/b/myshopyapp.appspot.com/o/images%2Fflowers.jpeg07b092a3-964f-41fc-bfa3-b03d1f0f0ad8?alt=media&token=e533d6f2-acdb-41da-acda-22c96533fcf6"
-					alt="Norway"
-				/>
-			</CardSection>
-			<Flex p={15} direction="column" gap="12px">
-				<Text fw="bold" size="20px">
-					Title
-				</Text>
-				<Flex justify="space-between">
-					<Text size="14px" c="#A3A3A3">
-						Price:
-					</Text>
-					<Text fw="bold" size="20px">
-						$123
-					</Text>
-				</Flex>
-				<Button>Add to Cart</Button>
-			</Flex>
-		</Card>
-	);
-};
 
-// TODO: Сделать адаптив, отдельный грид для списка 
+
 const ProductList = () => {
 	const matches = useMediaQuery('(min-width: 55rem)');
+	const { data: products, isLoading, isError } = useGetAllProducts();
 
 	return (
 		<>
@@ -58,24 +34,15 @@ const ProductList = () => {
 					<Box style={{ justifySelf: "start", gridColumn: "2 / span 3" }}>
 						<Text>400 - 500</Text>
 					</Box>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
+					{
+						products?.map((product) => {
+							return (
+								<div key={product.productId}>
+									<ProductCard product={product} />
+								</div>
+							);
+						})
+					}
 				</SimpleGrid>
 				:
 				<SimpleGrid cols={1} px="3rem" >
@@ -92,24 +59,15 @@ const ProductList = () => {
 					<Box >
 						<Text>400 - 500</Text>
 					</Box>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
-					<div>
-						<Cardd />
-					</div>
+					{
+						products?.map((product) => {
+							return (
+								<div key={product.productId}>
+									<ProductCard product={product} />
+								</div>
+							);
+						})
+					}
 				</SimpleGrid>
 			}
 		</>
