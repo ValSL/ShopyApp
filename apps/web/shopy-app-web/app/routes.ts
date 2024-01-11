@@ -37,3 +37,6 @@ export const routesConfig: RoutesConfig = {
     [RoutesPaths.NotFound]: {},
 }
 
+export const privateRoutes = ["/home/product-list", "/home/user-products", "/"]
+export const publicRoutes = ["/auth/register", "/auth/login"]
+

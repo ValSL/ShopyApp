@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using OneOf;
 using ShopyApp.Common.Errors;
-using ShopyApp.Features.Products.Errors;
 using ShopyApp.Features.Products.Models;
 using ShopyApp.Features.Products.Repositories;
 using ShopyApp.Features.Products.UseCases.Commands.CreateProductCommand;

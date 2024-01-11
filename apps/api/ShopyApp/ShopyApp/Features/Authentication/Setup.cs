@@ -1,6 +1,8 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Reflection;
 using System.Text;
 using MediatR;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using ShopyApp.Features.Authentication.Repositories.UserRepository;
 using ShopyApp.Features.Authentication.Services.JwtTokenGenerator;
@@ -22,11 +24,10 @@ public static class Setup
             };
         });
         serviceCollection.AddAuthorization();
-
         serviceCollection.Configure<JwtSettings>(configurationManager.GetSection("JwtSettings"));
         serviceCollection.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
-        serviceCollection.AddMediatR(typeof(Setup).Assembly);
+        serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Setup).Assembly));
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         return serviceCollection;
     }

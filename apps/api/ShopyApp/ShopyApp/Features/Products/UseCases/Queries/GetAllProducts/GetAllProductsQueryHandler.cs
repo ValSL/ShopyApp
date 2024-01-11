@@ -22,7 +22,7 @@ public class GetAllProductsQueryHandler : IRequestHandler<GetAllProductsQuery, O
         {
             return new List<Error> { ErrorsProducts.ProductsFetchingError };
         }
-        return new GetAllProductsResult(products.ToList());
+        return new GetAllProductsResult(products.Where(x => x.ProductId <= 9).ToList());
     }
 
     

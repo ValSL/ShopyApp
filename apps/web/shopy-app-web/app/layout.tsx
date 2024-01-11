@@ -27,9 +27,9 @@ export default function RootLayout({ children }: { children: any; }) {
 				<MantineProvider theme={theme}>
 					<Box style={{background: "#FCFCFC"}}>
 						<QueryProvider>
-							<PageScopeProvider>
+							{/* <PageScopeProvider> */}
 								{children}
-							</PageScopeProvider>
+							{/* </PageScopeProvider> */}
 						</QueryProvider>
 					</Box>
 

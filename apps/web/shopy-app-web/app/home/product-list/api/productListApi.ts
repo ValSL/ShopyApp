@@ -1,12 +1,14 @@
 import apiClient from "@/app/shared/api/axios.client";
 import { Product } from "@/app/shared/types/product.type";
 import { useQuery } from "@tanstack/react-query";
+import { ProductListResponse } from "./productListResponse";
 
-export function useGetAllProducts() {
+export function useGetAllProducts(currentPage: number, pageSize: number) {
+
 	const getAllProducts = async () => {
-		const result = await apiClient.get<Product[]>("products");
+		const result = await apiClient.get<ProductListResponse>(`products/${currentPage}/${pageSize}`);
 		return result.data
 	};
 
-	return useQuery({ queryKey: ["allProducts"], queryFn: getAllProducts });
+	return useQuery({ queryKey: ["allProducts", currentPage], queryFn: getAllProducts });
 }

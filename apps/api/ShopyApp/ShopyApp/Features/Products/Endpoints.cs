@@ -4,9 +4,11 @@ using Carter;
 using FluentValidation;
 using MapsterMapper;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using ShopyApp.Features.Products.Contracts;
 using ShopyApp.Features.Products.UseCases.Commands.CreateProductCommand;
 using ShopyApp.Features.Products.UseCases.Queries.GetProductById;
+using ShopyApp.Features.Products.UseCases.Queries.GetProductsByPage;
 
 namespace ShopyApp.Features.Products;
 
@@ -16,9 +18,11 @@ public class ProductsEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/products");
         {
-            group.MapGet("", GetAllProducts);
+            group.MapGet("/{pageNumber}/{pageSize}", GetProductsByPage);
+            // group.MapGet("", GetAllProducts);
             group.MapGet("/{id}", GetProductById);
             group.MapPost("/create", CreateProduct).RequireAuthorization();
+            // group.MapPost("/create", CreateProduct).RequireAuthorization();
         }
     }
     public async Task<IResult> CreateProduct(HttpRequest request, HttpContext httpContext, IMediator mediator, IMapper mapper, IValidator<CreateProductCommand> validator)
@@ -29,7 +33,7 @@ public class ProductsEndpoints : ICarterModule
             request.Form.Files["Image"],
             int.Parse(httpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub))
         );
-        
+
         var validationResult = await validator.ValidateAsync(createProductCommand);
         if (!validationResult.IsValid)
         {
@@ -66,6 +70,15 @@ public class ProductsEndpoints : ICarterModule
 
         return getProductByIdResult.Match(
             result => Results.Ok(result.Product),
+            errors => ProblemDetailsHelper.ProblemDetails(errors));
+    }
+
+    public async Task<IResult> GetProductsByPage([AsParameters] GetProductsByPageRequest request, IMediator mediator, IMapper mapper)
+    {
+        var getProductsByPageQuery = mapper.Map<GetProductsByPageQuery>(request);
+        var productsResult = await mediator.Send(getProductsByPageQuery);
+        return productsResult.Match(
+            result => Results.Ok(result),
             errors => ProblemDetailsHelper.ProblemDetails(errors));
     }
 

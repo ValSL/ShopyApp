@@ -7,12 +7,12 @@ export const ProductCard = ({ product }: { product: Product; }) => {
 		<Card p={0} className={classes.card} >
 			<CardSection>
 				<Image
-					height={160}
+					height={150}
 					src={product.imageUrl}
 					alt="Norway"
 				/>
 			</CardSection>
-			<Flex p={15} direction="column" gap="12px">
+			<Flex p={15} direction="column" gap="10px">
 				<Text fw="bold" size="20px">
 					{product.title}
 				</Text>
