@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, SimpleGrid, TextInput, Text, Pagination } from "@mantine/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import classes from "./home.module.css";
 import { IconSearch } from "@tabler/icons-react";
@@ -11,12 +11,24 @@ import { ProductCard } from "./components/ProductItem";
 
 
 
+
 const ProductList = () => {
 	const matches = useMediaQuery('(min-width: 55rem)');
 
-	const pageSize = matches ? 6 : 3;
-
+	const [pageSize, setPageSize] = useState(6);
 	const [currentPage, setCurrentPage] = useState(1);
+
+	useEffect(() => {
+		if (matches) {
+			setPageSize(6);
+			setCurrentPage(1);
+		}
+		else {
+			setPageSize(3);
+			setCurrentPage(1);
+		}
+	}, [matches]);
+
 	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize);
 
 	if (isLoading) return <></>;

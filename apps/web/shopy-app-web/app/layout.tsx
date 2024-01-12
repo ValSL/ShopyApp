@@ -24,16 +24,15 @@ export default function RootLayout({ children }: { children: any; }) {
 				/>
 			</head>
 			<body>
-				<MantineProvider theme={theme}>
-					<Box style={{background: "#FCFCFC"}}>
-						<QueryProvider>
-							{/* <PageScopeProvider> */}
+				<QueryProvider>
+					<PageScopeProvider>
+						<MantineProvider theme={theme}>
+							<Box style={{ background: "#FCFCFC" }}>
 								{children}
-							{/* </PageScopeProvider> */}
-						</QueryProvider>
-					</Box>
-
-				</MantineProvider>
+							</Box>
+						</MantineProvider>
+					</PageScopeProvider>
+				</QueryProvider>
 			</body>
 		</html>
 	);

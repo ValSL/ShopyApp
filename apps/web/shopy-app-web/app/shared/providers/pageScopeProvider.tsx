@@ -11,6 +11,9 @@ const PageScopeProvider = ({ children }: { children: any }) => {
 
     const { scope } = routesConfig[route as RoutesPaths];
 
+
+    if(isLoading) return <><p>Loading ...</p></>
+
     if (scope === ScopeType.PUBLIC && isSuccess) {
         router.push(RoutesPaths.ProductList);
         router.refresh();

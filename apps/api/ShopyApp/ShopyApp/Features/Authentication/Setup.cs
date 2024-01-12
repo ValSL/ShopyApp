@@ -28,7 +28,7 @@ public static class Setup
         serviceCollection.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
         serviceCollection.AddScoped<IUserRepository, UserRepository>();
         serviceCollection.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(Setup).Assembly));
-        JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+        //JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
         return serviceCollection;
     }
 }

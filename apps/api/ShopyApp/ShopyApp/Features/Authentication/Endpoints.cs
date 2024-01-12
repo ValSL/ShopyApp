@@ -62,7 +62,8 @@ namespace ShopyApp.Features.Authentication
             var user = httpContext.User.Identity;
             if (user is not null && user.IsAuthenticated)
             {
-                return Results.Ok(httpContext.User.FindFirst(JwtRegisteredClaimNames.GivenName).Value);
+                //return Results.Ok(httpContext.User.FindFirst(JwtRegisteredClaimNames.GivenName).Value);
+                return Results.Ok();
             }
             else
             {

@@ -10,5 +10,5 @@ export function useGetAllProducts(currentPage: number, pageSize: number) {
 		return result.data
 	};
 
-	return useQuery({ queryKey: ["allProducts", currentPage], queryFn: getAllProducts });
+	return useQuery({ queryKey: ["allProducts", currentPage, pageSize], queryFn: getAllProducts });
 }
