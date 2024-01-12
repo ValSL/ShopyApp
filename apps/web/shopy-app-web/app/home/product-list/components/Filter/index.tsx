@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React from "react";
 import classes from "./filter.module.css";
@@ -6,7 +6,14 @@ import { Box, Flex, NumberInput, SimpleGrid, Text, rem } from "@mantine/core";
 import { IconX, IconCurrencyDram } from "@tabler/icons-react";
 import { useMediaQuery } from "@mantine/hooks";
 
-const Filter = () => {
+type FilterProps = {
+	fromFilter: number,
+	toFilter: number,
+	setFromFilter: React.Dispatch<React.SetStateAction<number | string>>;
+	setToFilter: React.Dispatch<React.SetStateAction<number | string>>;
+};
+
+const Filter = ({ fromFilter, toFilter, setFromFilter, setToFilter }: FilterProps) => {
 	const match = useMediaQuery("(max-width: 1024px)");
 	const icon = <IconCurrencyDram style={{ width: rem(0), height: rem(0) }} stroke={0} />;
 	const from = <Text size="14px">From:</Text>;
@@ -17,7 +24,7 @@ const Filter = () => {
 				<Text fw="bold" size="20px">
 					Filters
 				</Text>
-				<Flex align="center" className={classes.resetButton} gap={5}>
+				<Flex align="center" className={classes.resetButton} gap={5} onClick={() => { setFromFilter(""); setToFilter(""); }}>
 					<Text size="14px">Reset</Text>
 					<IconX size={14} />
 				</Flex>
@@ -33,6 +40,8 @@ const Filter = () => {
 					style={{ gridRowStart: 5, gridColumn: match ? "span 2" : "" }}
 					leftSection={from}
 					rightSection={icon}
+					value={fromFilter}
+					onChange={setFromFilter}
 				/>
 				<NumberInput
 					styles={{ section: { marginLeft: "2px" }, input: { paddingLeft: "32px" } }}
@@ -40,6 +49,8 @@ const Filter = () => {
 					prefix="$"
 					leftSection={to}
 					rightSection={icon}
+					value={toFilter}
+					onChange={setToFilter}
 				/>
 			</SimpleGrid>
 		</Box>

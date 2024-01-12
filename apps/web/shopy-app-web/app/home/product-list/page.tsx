@@ -19,7 +19,14 @@ const ProductList = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 
 	const [query, setQuery] = useState('');
-	const [debounced] = useDebouncedValue(query, 500);
+	const [debouncedQuery] = useDebouncedValue(query, 500);
+
+	const [fromFilter, setFromFilter] = useState<string | number>("");
+	const [debouncedFromFilter] = useDebouncedValue(fromFilter, 500);
+
+	const [toFilter, setToFilter] = useState<string | number>("");
+	const [debouncedToFilter] = useDebouncedValue(toFilter, 500);
+
 
 	useEffect(() => {
 		if (matches) {
@@ -32,7 +39,7 @@ const ProductList = () => {
 		}
 	}, [matches]);
 
-	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize, debounced);
+	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize, debouncedQuery, debouncedFromFilter as number, debouncedToFilter as number);
 
 	if (isLoading) return <></>;
 
@@ -42,10 +49,10 @@ const ProductList = () => {
 				<>
 					<SimpleGrid cols={4} px="3rem" spacing={25}>
 						<Box className={classes.filter}>
-							<Filter />
+							<Filter fromFilter={debouncedFromFilter as number} toFilter={debouncedToFilter as number} setToFilter={setToFilter} setFromFilter={setFromFilter} />
 						</Box>
 						<Box className={classes.searchInput}>
-							<TextInput value={query} onChange={(e) => setQuery(e.target.value)}  leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
+							<TextInput value={query} onChange={(e) => setQuery(e.target.value)} leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
 						</Box>
 						<Box>
 							<Text fw="bold">{data?.productsCount} Results</Text>
@@ -54,7 +61,7 @@ const ProductList = () => {
 							<Text>Sort by newest</Text>
 						</Box>
 						<Box style={{ justifySelf: "start", gridColumn: "2 / span 3" }}>
-							<Text>400 - 500</Text>
+							<Text>${debouncedFromFilter === "" ? 0 : debouncedFromFilter} - ${debouncedToFilter === "" ? 0 : debouncedToFilter}</Text>
 						</Box>
 						{
 							data?.products.map((product) => {
@@ -75,9 +82,9 @@ const ProductList = () => {
 				<>
 					<SimpleGrid cols={1} px="3rem" >
 						<Box>
-							<TextInput leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
+							<TextInput value={query} onChange={(e) => setQuery(e.target.value)} leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
 						</Box>
-						<Filter />
+						<Filter fromFilter={debouncedFromFilter as number} toFilter={debouncedToFilter as number} setToFilter={setToFilter} setFromFilter={setFromFilter} />
 						<Box>
 							<Text fw="bold">{data?.productsCount} Results</Text>
 						</Box>
@@ -85,7 +92,8 @@ const ProductList = () => {
 							<Text>Sort by newest</Text>
 						</Box>
 						<Box >
-							<Text>400 - 500</Text>
+							<Text>${debouncedFromFilter} - ${debouncedToFilter}</Text>
+
 						</Box>
 						{
 							data?.products.map((product) => {

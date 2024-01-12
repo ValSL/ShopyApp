@@ -74,10 +74,12 @@ public class ProductsEndpoints : ICarterModule
             errors => ProblemDetailsHelper.ProblemDetails(errors));
     }
 
-    public async Task<IResult> GetProductsByPage([AsParameters] GetProductsByPageRequest request, IMediator mediator, IMapper mapper)
+    public async Task<IResult> GetProductsByPage([AsParameters] GetProductsByPageRequest request, HttpContext httpContext, IMediator mediator, IMapper mapper)
     {
         var getProductsByPageQuery = mapper.Map<GetProductsByPageQuery>(request);
+
         var productsResult = await mediator.Send(getProductsByPageQuery);
+
         return productsResult.Match(
             result => Results.Ok(result),
             errors => ProblemDetailsHelper.ProblemDetails(errors));

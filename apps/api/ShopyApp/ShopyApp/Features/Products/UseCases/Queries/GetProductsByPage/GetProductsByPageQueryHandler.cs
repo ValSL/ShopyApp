@@ -1,11 +1,9 @@
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 using OneOf;
 using ShopyApp.Common.Errors;
 using ShopyApp.Features.Products.Errors;
 using ShopyApp.Features.Products.Models;
 using ShopyApp.Features.Products.Repositories;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ShopyApp.Features.Products.UseCases.Queries.GetProductsByPage;
 
@@ -26,28 +24,17 @@ public class GetProductsByPageQueryHandler : IRequestHandler<GetProductsByPageQu
 
         IQueryable<Product> products;
 
-        if (request.Query != null)
-        {
-            var productsByQuery = _productRepository.GetProducts()
-                .OrderBy(item => item.ProductId)
-                .Where(item => item.Title.ToLower().Contains(request.Query.ToLower()));
+        var productsByQuery = _productRepository.GetProducts()
+            .OrderBy(item => item.ProductId)
+            .Where(item => item.Title.ToLower().Contains(request.Query != null ? request.Query.ToLower() : ""))
+            .Where(item => !string.IsNullOrEmpty(request.From) ? item.Price >= int.Parse(request.From) : item.Price >= 0)
+            .Where(item => !string.IsNullOrEmpty(request.To) ? item.Price <= int.Parse(request.To) : item.Price <= 1000000000);
 
-            productsCount = productsByQuery.Count();
+        productsCount = productsByQuery.Count();
 
-            products = productsByQuery
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize);
-        }
-        else
-        {
-            var productsWithoutQuery = _productRepository.GetProducts();
-            productsCount = productsWithoutQuery.Count();
-            products = productsWithoutQuery
-                .OrderBy(item => item.ProductId)
-                .Skip((request.PageNumber - 1) * request.PageSize)
-                .Take(request.PageSize);
-
-        }
+        products = productsByQuery
+            .Skip((request.PageNumber - 1) * request.PageSize)
+            .Take(request.PageSize);
 
         if (products is null)
         {
