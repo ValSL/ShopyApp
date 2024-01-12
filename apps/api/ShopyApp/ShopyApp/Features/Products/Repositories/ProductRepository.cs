@@ -27,19 +27,32 @@ public class ProductRepository : IProductRepository
         return _dbContext.Products.SingleOrDefault(item => item.ProductId == id);
     }
 
-    public List<Product> GetProducts()
+    public IQueryable<Product> GetProducts()
     {
-        return _dbContext.Products.AsNoTracking().ToList();
+        return _dbContext.Products.AsNoTracking();
     }
 
-    public List<Product>? GetProductsByPage(int pageNumber, int pageSize)
+    public List<Product>? GetProductsByPage(int pageNumber, int pageSize, string query)
     {
-        var (x, y) = new Point(1, 2);
-        IQueryable<Product> products = _dbContext.Products
+        IQueryable<Product> products;
+        if (query != null)
+        {
+            products = _dbContext.Products
+            .AsNoTracking()
+            .OrderBy(item => item.ProductId)
+            .Where(item => item.Title.Contains(query))
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize);
+        }
+        else
+        {
+            products = _dbContext.Products
             .AsNoTracking()
             .OrderBy(item => item.ProductId)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize);
+        }
+
         return [.. products];
     }
 }

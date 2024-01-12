@@ -1,11 +1,11 @@
 'use client';
 
 import { Box, SimpleGrid, TextInput, Text, Pagination } from "@mantine/core";
-import React, { useEffect, useState } from "react";
+import React, { useDeferredValue, useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import classes from "./home.module.css";
 import { IconSearch } from "@tabler/icons-react";
-import { useMediaQuery } from '@mantine/hooks';
+import { useDebouncedValue, useMediaQuery } from '@mantine/hooks';
 import { useGetAllProducts } from "./api/productListApi";
 import { ProductCard } from "./components/ProductItem";
 
@@ -18,6 +18,9 @@ const ProductList = () => {
 	const [pageSize, setPageSize] = useState(6);
 	const [currentPage, setCurrentPage] = useState(1);
 
+	const [query, setQuery] = useState('');
+	const [debounced] = useDebouncedValue(query, 500);
+
 	useEffect(() => {
 		if (matches) {
 			setPageSize(6);
@@ -29,7 +32,7 @@ const ProductList = () => {
 		}
 	}, [matches]);
 
-	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize);
+	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize, debounced);
 
 	if (isLoading) return <></>;
 
@@ -42,7 +45,7 @@ const ProductList = () => {
 							<Filter />
 						</Box>
 						<Box className={classes.searchInput}>
-							<TextInput leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
+							<TextInput value={query} onChange={(e) => setQuery(e.target.value)}  leftSection={<IconSearch size={16} />} radius="8px" placeholder="Type to search..." />
 						</Box>
 						<Box>
 							<Text fw="bold">{data?.productsCount} Results</Text>

@@ -18,6 +18,7 @@ public class ProductsEndpoints : ICarterModule
     {
         var group = app.MapGroup("/api/products");
         {
+            group.MapGet("/{pageNumber}/{pageSize}/{query}", GetProductsByPage);
             group.MapGet("/{pageNumber}/{pageSize}", GetProductsByPage);
             // group.MapGet("", GetAllProducts);
             group.MapGet("/{id}", GetProductById);
