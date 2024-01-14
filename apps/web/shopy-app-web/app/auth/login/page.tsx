@@ -40,6 +40,7 @@ const LoginPage = () => {
         queryClient.invalidateQueries({ queryKey: ['user'] });
         localStorage.setItem("access_token", response.data.token);
         router.push(RoutesPaths.ProductList);
+        router.refresh();
       },
     });
 

@@ -8,11 +8,14 @@ const PageScopeProvider = ({ children }: { children: any }) => {
     const router = useRouter();
     const route = usePathname();
     const { isSuccess, isError, isLoading } = useCheckUser();
+    // const isLoading = true;
+    // const isSuccess = false;
+    // const isError = false;
 
     const { scope } = routesConfig[route as RoutesPaths];
 
 
-    if(isLoading) return <><p>Loading ...</p></>
+    if(isLoading) return <><p>Page scope loading ...</p></>
 
     if (scope === ScopeType.PUBLIC && isSuccess) {
         router.push(RoutesPaths.ProductList);

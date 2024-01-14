@@ -1,7 +1,5 @@
-import { RoutesPaths } from "@/app/routes";
 import apiClient from "@/app/shared/api/axios.client";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 export function useRegister<T>() {
 	const register = (data: T) => {

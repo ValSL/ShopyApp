@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, SimpleGrid, TextInput, Text, Pagination } from "@mantine/core";
-import React, { useDeferredValue, useEffect, useState } from "react";
+import React, { useContext, useDeferredValue, useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import classes from "./home.module.css";
 import { IconSearch } from "@tabler/icons-react";
@@ -10,10 +10,8 @@ import { useGetAllProducts } from "./api/productListApi";
 import { ProductCard } from "./components/ProductItem";
 
 
-
-
 const ProductList = () => {
-	const matches = useMediaQuery('(min-width: 55rem)');
+	const matches = true;
 
 	const [pageSize, setPageSize] = useState(6);
 	const [currentPage, setCurrentPage] = useState(1);
@@ -39,9 +37,8 @@ const ProductList = () => {
 		}
 	}, [matches]);
 
-	const { data, isLoading, isError } = useGetAllProducts(currentPage, pageSize, debouncedQuery, debouncedFromFilter as number, debouncedToFilter as number);
+	const { data, isSuccess } = useGetAllProducts(currentPage, pageSize, debouncedQuery, debouncedFromFilter as number, debouncedToFilter as number);
 
-	if (isLoading) return <></>;
 
 	return (
 		<>
@@ -64,6 +61,7 @@ const ProductList = () => {
 							<Text>${debouncedFromFilter === "" ? 0 : debouncedFromFilter} - ${debouncedToFilter === "" ? 0 : debouncedToFilter}</Text>
 						</Box>
 						{
+							isSuccess &&
 							data?.products.map((product) => {
 								return (
 									<div key={product.productId}>
@@ -75,7 +73,9 @@ const ProductList = () => {
 
 					</SimpleGrid>
 					<Box className={classes.pageBlock}>
-						<Pagination total={Math.ceil(data!.productsCount / pageSize)} value={currentPage} onChange={setCurrentPage} mt="sm" />
+						{isSuccess &&
+							<Pagination total={Math.ceil(data!.productsCount / pageSize)} value={currentPage} onChange={setCurrentPage} mt="sm" />
+						}
 					</Box>
 				</>
 				:
@@ -96,6 +96,7 @@ const ProductList = () => {
 
 						</Box>
 						{
+							isSuccess &&
 							data?.products.map((product) => {
 								return (
 									<div key={product.productId}>
@@ -106,7 +107,11 @@ const ProductList = () => {
 						}
 					</SimpleGrid>
 					<Box className={classes.pageBlock}>
-						<Pagination total={Math.ceil(data!.productsCount / pageSize)} value={currentPage} onChange={setCurrentPage} mb="sm" />
+						{
+							isSuccess &&
+							<Pagination total={Math.ceil(data!.productsCount / pageSize)} value={currentPage} onChange={setCurrentPage} mb="sm" />
+
+						}
 					</Box>
 				</>
 			}
