@@ -23,7 +23,7 @@ namespace ShopyApp.Application.Authentication.Queries.Login
 
         public async Task<OneOf<AuthenticationResult, List<Error>>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
-            await Task.CompletedTask; // заглушка
+            await Task.CompletedTask;
 
             if (_userRepository.GetUserByEmail(request.Email) is not User user)
             {

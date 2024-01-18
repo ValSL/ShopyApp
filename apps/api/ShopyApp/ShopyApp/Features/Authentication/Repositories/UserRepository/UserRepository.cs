@@ -13,10 +13,10 @@ namespace ShopyApp.Features.Authentication.Repositories.UserRepository
     {
         //private static readonly List<User> _users = new();
 
-        private readonly AppDbContext _appDbContext;
+        private readonly PostgreSqlDbContext _appDbContext;
         private readonly MySqlDbContext _mySqlDbContext;
 
-        public UserRepository(AppDbContext appDbContext, MySqlDbContext mySqlDbContext)
+        public UserRepository(PostgreSqlDbContext appDbContext, MySqlDbContext mySqlDbContext)
         {
             _appDbContext = appDbContext;
             _mySqlDbContext = mySqlDbContext;

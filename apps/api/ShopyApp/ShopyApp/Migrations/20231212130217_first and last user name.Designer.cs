@@ -11,7 +11,7 @@ using ShopyApp.Database;
 
 namespace ShopyApp.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
+    [DbContext(typeof(PostgreSqlDbContext))]
     [Migration("20231212130217_first and last user name")]
     partial class firstandlastusername
     {

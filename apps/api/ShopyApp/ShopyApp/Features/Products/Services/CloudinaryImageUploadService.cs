@@ -1,19 +1,23 @@
 ﻿using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
+using Microsoft.Extensions.Options;
+using ShopyApp.Features.Products.Services;
 
 namespace ShopyApp;
 
 public class CloudinaryImageUploadService : IImageUploadService
 {
-    const string Cloud = "dyregmisw";
-    const string ApiKey = "893793574941111";
-    const string ApiSecret = "8KlURKJfdtlsRnyieJuiEVEvtKI";
+    //const string Cloud = "dyregmisw";
+    //const string ApiKey = "893793574941111";
+    //const string ApiSecret = "8KlURKJfdtlsRnyieJuiEVEvtKI";
+    private readonly CloudinaryOptions _options;
 
     private readonly Cloudinary _cloudinary;
 
-    public CloudinaryImageUploadService()
+    public CloudinaryImageUploadService(IOptions<CloudinaryOptions> options)
     {
-        var account = new Account(Cloud, ApiKey, ApiSecret);
+        _options = options.Value;
+        var account = new Account(_options.Cloud, _options.ApiKey, _options.ApiSecret);
         _cloudinary = new Cloudinary(account);
         _cloudinary.Api.Secure = true;
     }

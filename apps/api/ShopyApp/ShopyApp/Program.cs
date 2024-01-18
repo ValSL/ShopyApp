@@ -1,10 +1,12 @@
 using System.Reflection;
 using Carter;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using ShopyApp;
 using ShopyApp.Common.Mapping;
 using ShopyApp.Database;
 using ShopyApp.Features.Carts;
+using ShopyApp.Features.Products.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -18,11 +20,17 @@ var builder = WebApplication.CreateBuilder(args);
                 .AllowCredentials();
         });
     });
+
+    builder.Services.Configure<CloudinaryOptions>(builder.Configuration.GetSection("CloudinaryOptions"));
+
     builder.Services
         .AddAuthFeatures(builder.Configuration)
         .AddProductsFeatures()
         .AddCartFeatures();
-    builder.Services.AddDbContext<AppDbContext>();
+
+    builder.Services.AddDbContext<PostgreSqlDbContext>(
+        options => options.UseNpgsql("name=ConnectionStrings:PostgreSql"));
+
     builder.Services.AddDbContext<MySqlDbContext>();
     builder.Services.AddCarter();
     builder.Services.AddMapping();

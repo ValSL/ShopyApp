@@ -22,8 +22,7 @@ public class ProductsEndpoints : ICarterModule
             group.MapGet("/{pageNumber}/{pageSize}", GetProductsByPage);
             // group.MapGet("", GetAllProducts);
             group.MapGet("/{id}", GetProductById);
-            group.MapPost("/create", CreateProduct).RequireAuthorization();
-            // group.MapPost("/create", CreateProduct).RequireAuthorization();
+            group.MapPost("/create", CreateProduct);
         }
     }
     public async Task<IResult> CreateProduct(HttpRequest request, HttpContext httpContext, IMediator mediator, IMapper mapper, IValidator<CreateProductCommand> validator)
@@ -32,7 +31,7 @@ public class ProductsEndpoints : ICarterModule
             request.Form["Title"],
             request.Form["Price"],
             request.Form.Files["Image"],
-            int.Parse(httpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub))
+            int.Parse(httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))
         );
 
         var validationResult = await validator.ValidateAsync(createProductCommand);

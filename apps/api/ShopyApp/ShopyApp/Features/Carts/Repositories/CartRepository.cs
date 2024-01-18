@@ -8,8 +8,8 @@ namespace ShopyApp.Features.Carts.Repositories;
 
 public class CartRepository : ICartRepository
 {
-    private readonly AppDbContext _dbContext;
-    public CartRepository(AppDbContext dbContext)
+    private readonly PostgreSqlDbContext _dbContext;
+    public CartRepository(PostgreSqlDbContext dbContext)
     {
         _dbContext = dbContext;
     }

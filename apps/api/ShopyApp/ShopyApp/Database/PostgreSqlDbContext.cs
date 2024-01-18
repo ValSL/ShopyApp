@@ -7,13 +7,13 @@ using ShopyApp.Features.Products.Models;
 
 namespace ShopyApp.Database;
 
-public partial class AppDbContext : DbContext
+public partial class PostgreSqlDbContext : DbContext
 {
-    public AppDbContext()
+    public PostgreSqlDbContext()
     {
     }
 
-    public AppDbContext(DbContextOptions<AppDbContext> options)
+    public PostgreSqlDbContext(DbContextOptions<PostgreSqlDbContext> options)
         : base(options)
     {
     }
@@ -25,9 +25,6 @@ public partial class AppDbContext : DbContext
     public virtual DbSet<Product> Products { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql("Host=cornelius.db.elephantsql.com;Database=ukxrnjwy;Username=ukxrnjwy;Password=01QLgD9ky5feAOgp19zbxpwajQcmqmXR");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

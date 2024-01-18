@@ -7,10 +7,10 @@ namespace ShopyApp.Features.Products.Repositories;
 
 public class ProductRepository : IProductRepository
 {
-    private readonly AppDbContext _dbContext;
+    private readonly PostgreSqlDbContext _dbContext;
     private readonly MySqlDbContext _mySqlDbContext;
 
-    public ProductRepository(AppDbContext dbContext, MySqlDbContext mySqlDbContext)
+    public ProductRepository(PostgreSqlDbContext dbContext, MySqlDbContext mySqlDbContext)
     {
         _dbContext = dbContext;
         _mySqlDbContext = mySqlDbContext;

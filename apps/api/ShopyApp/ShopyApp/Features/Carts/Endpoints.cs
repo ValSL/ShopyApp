@@ -21,7 +21,7 @@ public class Endpoints : ICarterModule
 
     public void AddToCart([FromBody]AddToCartRequest request, HttpContext httpContext, IMediator mediator)
     {
-        var command = new AddToCartCommand(int.Parse(httpContext.User.FindFirstValue(JwtRegisteredClaimNames.Sub)!), request.ProductId);
+        var command = new AddToCartCommand(int.Parse(httpContext.User.FindFirstValue(ClaimTypes.NameIdentifier)!), request.ProductId);
         mediator.Send(command);
     }
 
